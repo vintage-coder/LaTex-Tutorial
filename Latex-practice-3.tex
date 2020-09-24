@@ -1,0 +1,121 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+
+
+
+\title{Table and Article Example}
+\author{Dong Lee}
+\date{2020/09/24}
+
+
+\begin{document}
+
+\textcolor{red}{\maketitle}
+
+\begin{center}
+  \includegraphics[scale=0.1]{C:/Users/linkeddots/Documents/Sample Images/hand.jpg}
+\end{center}
+
+Environment is the boon given by the nature. we won't harm environment in any manner. \\
+If we damaged environment , it will cause a terrible effect to our earth by means of natural 
+disasters like \textcolor{green}{Earthquake, soil erosion, floods},\quad etc.
+
+So,\textcolor{blue} {Save our Earth by planting trees. Save our future generations.}
+
+
+
+\newpage
+
+\begin{center}
+
+TABLE 1
+
+\end{center}
+
+\begin{tabular}{lcr}
+
+a&b&c\\
+d&e&f\\
+g&h&i
+
+\end{tabular}
+
+\begin{center}
+TABLE 2
+
+\begin{tabular}{|l|c|r|}
+
+\hline
+a&b&c\\ \hline
+d&e&f\\ \hline
+g&h&i\\ \hline
+
+\end{tabular}
+
+%
+%\begin{tabular}{|r|l|}
+%\hline
+%I,II,III,IV...&upperRoman
+%i,ii,iii...&lowerRoman \\ \cline{2-2}
+%1,2,3...&Arabic format \\
+%\hline \hline
+%1684&decimal digits\\
+%\hline
+%\end{tabular}
+
+\end{center}
+
+%using booktabs approach
+
+\begin{table}[h!]
+\begin{center}
+\caption{Table using booktabs...}
+\label{tab:table1}
+\begin{tabular}{|l|c|r|}
+
+\toprule
+
+\textbf{Heading 1} & \textbf{Heading 2} & \textbf{Heading 3}\\
+$\alpha$&$\beta$&$\gamma$\\
+
+\midrule
+
+1 & 1.101 & a\\
+2 & 103.145 &b\\
+3 & 289.1 & c\\
+4 & 17.132114 &d\\
+
+\bottomrule
+
+\end{tabular}
+
+
+\end{center}
+
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
