@@ -4,6 +4,8 @@
 \usepackage{xfrac}
 \usepackage{xcolor}
 \usepackage{diffcoeff}
+\usepackage[all]{xy}
+
 
 
 
@@ -209,6 +211,117 @@
 \[
 	\diffp[2,3,2]F{x,y,z}
 \]
+
+\[
+\fbox{\xygraph{
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}
+!{(0,0)}* + {\bullet_{m}}
+!{(0,1)}* + {\bullet_{n}}
+!{(2,1)}* + {\bullet_{o}}
+!{(4,-2)}* + {\bullet_{p}}
+}}
+\]
+
+\[\fbox{\xygraph{
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}
+!{(0,0)}* + {\bullet_{q}}="q"
+!{(1,0)}* + {\bullet_{r}}="r"
+!{(2,1)}* + {\bullet_{s}}="s"
+!{(3,-2)}* + {\bullet_{t}}="t"
+"q"-"r" "t"-"q"
+"r"-"s"
+"s"-"t"
+"t"-"s"
+}}\]
+
+% Blending Edges in Graph
+
+\[\fbox{\xygraph{
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}
+!{(0,0)}* + {\bullet_{q}}="q"
+!{(1,0)}* + {\bullet_{r}}="r"
+!{(2,1)}* + {\bullet_{s}}="s"
+!{(3,-2)}* + {\bullet_{t}}="t"
+"q"-"r" "t"-"q"
+"r"-"s"
+"s"-@/^/"t"
+"t"-@/^/"s"
+}}\]
+
+% Blending Edges length
+
+
+\[\fbox{\xygraph{
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}
+!{(0,0)}* + {\bullet_{q}}="q"
+!{(1,0)}* + {\bullet_{r}}="r"
+!{(2,1)}* + {\bullet_{s}}="s"
+!{(3,-2)}* + {\bullet_{t}}="t"
+"q"-"r" "t"-"q"
+"r"-"s"
+"s"-@/^1cm/"t"
+"t"-@/^0.8cm/"s"
+}}\]
+
+% Blending Edge with name
+
+\[ \fbox{ \xygraph{  
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}  
+!{(0,0) }*+{\bullet_{e}}="e"  
+!{(1,1) }*+{\bullet_{f}}="f"  
+!{(2.5,0.5) }*+{\bullet_{g}}="g"  
+!{(3,-1)}*+{\bullet_{h}}="h"  
+"e"-"f"^(0.6){c_1}  
+"f"-@/^2cm/"h" ^(0.6){e_2}   
+"h"-"g" ^(0.8){a_3}  
+"e"-@/^/"h" ^(0.4){e_4}  
+"f"-@/^1cm/"g" ^(0.7){b_5}      
+} } \]  
+
+
+% Color Vertices
+
+ \[ \fbox{ \xygraph{  
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}  
+!{(0,0) }*+[red]{\bullet_{q}}="q"  
+!{(1,0) }*+{\bullet_{r}}="r"  
+!{(2,1) }*+[blue]{\bullet_{s}}="s"  
+!{(3,-3)}*+[green]{\bullet_{t}}="t"  
+"q":"r" "s":"q"  
+"r":"s"  
+"q"-@/^/"t"  
+"t"-@/^/"s"  
+} } \]  
+
+
+% Color Edges
+
+ \[ \fbox{ \xygraph{  
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}  
+!{(0,0) }*+[red]{\bullet_{q}}="q"  
+!{(1,0) }*+{\bullet_{r}}="r"  
+!{(2,1) }*+[blue]{\bullet_{s}}="s"  
+!{(3,-3)}*+[green]{\bullet_{t}}="t"  
+"q":"r" "s":@[blue]"q"  
+"r":@[red]"s"  
+"q"-@/^/@[green]"t"  
+"t"-@/^/@[orange]"s"  
+} } \]  
+
+% Loops in Graph
+
+\[ \fbox{ \xygraph{  
+!{<0cm,0cm>;<1cm,0cm>:<0cm,1cm>::}  
+!{(0,0) }*+{\bullet_{q}}="q"  
+!{(2,1) }*+{\bullet_{s}}="s"  
+!{(3,-2)}*+{\bullet_{t}}="t"  
+"q"-"s" "s"-"t"  
+"q"-"t"  
+"q" -@(lu,ld) "q"  
+"s" -@(ru,rd) "s"  
+"t" -@(ld,rd) "t"  
+} } \]  
+
 \end{center}
 
 
