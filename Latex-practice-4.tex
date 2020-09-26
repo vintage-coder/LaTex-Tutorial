@@ -1,0 +1,48 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{soul}  
+
+%\colorlet{LightRubineRed}{RubineRed!70!}  
+%\colorlet{Mycolor1}{green!40!orange!60!}  
+
+
+\colorlet{LightRubineRed}{RubineRed!70!}
+\colorlet{MyColor1}{green!40!orange!60}
+
+\begin{document}
+
+
+% Color Lines 
+
+\noindent
+
+{\color{LightRubineRed}  \rule{\linewidth}{1mm}}\\
+
+\noindent
+
+{\color{MyColor1}\rule{\linewidth}{1mm}}
+
+
+%  Page BackGround Color
+
+\fcolorbox{red}{white}{The text is the simple \LaTeX\ text}\\ \\  
+
+\pagecolor{lightgray}
+
+\fcolorbox{blue}{cyan}{Hi Dong Lee ! How are you?}\\
+
+
+\sethlcolor{pink}
+
+The text given here is the \hl{highlighted text.}  
+
+\noindent
+
+\colorbox{green}{The text is written here}\\ \\  
+\colorbox{lightgray}{The text is written here}  
+
+
+\end{document}
+
