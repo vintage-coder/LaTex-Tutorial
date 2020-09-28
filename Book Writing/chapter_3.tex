@@ -1,0 +1,103 @@
+
+
+\chapter{CHAPTER 3}
+
+
+
+
+
+\section{SOFTWARE TOOLS}
+
+\subsubsection{UBUNTU}
+Ubuntu is one of the most powerful Linux operating system which is popular for its security. Recently, the 12.x version of Ubuntu operating system was launched that provides better user friendliness good user experience as compared to other operating systems. IT does not require too much of technical skills to work on it as the previous versions of Linux OS. Ubuntu can be easily installed with some other operating system too. 
+
+1.Ubuntu is one of the most secured operating system and defines the highest level of security as compared other operating system.
+2.Ubuntu is an open source OS.
+3.Ubuntu is most popular Linux operating system.
+4.Most of the soft-wares in Ubuntu are pre-installed to enhance user experience.
+5.It is available free of cost.
+6.1 GHz x 86 processor (Above Pentium 4)
+7.512 MB Ram
+8.5 GB space must be free on hard drive
+9.Graphic card with 800 x 600 resolution
+10. USB port or DVD drive for media installation
+
+\subsubsection{ETHERNET INTERFACES}
+Ethernet interfaces are identified by the system using the naming convention of ethX, where X represents a numeric value. The first Ethernet interface is typically identified as eth0 , the second as eth1 , and all others should move up in numerical order. Identify Ethernet Interfaces To quickly identify all available Ethernet interfaces, you can use the ifconfig command as shown below.
+
+Another application that can help identify all network interfaces available to your system is the lshw command. In the example below, lshw shows a single Ethernet interface with the logical name of eth0 along with bus information, driver details and all supported capabilities.
+\subsubsection{ETHERNET INTERFACE LOGIC NAMES}
+Interface logical names are configured in the file
+If you would like control which interface receives a particular logical name, find the line matching the interfaces
+physical MAC address and modify the value of
+Networking
+\subsubsection{ETHERNET INTERFACE SETTING}
+ethtool is a program that displays and changes Ethernet card settings such as auto-negotiation, port speed,
+duplex mode, and Wake-on-LAN. It is not installed by default, but is available for installation in the
+repositories.
+\subsubsection{INSTALLATION}
+Ubuntu 16.04 LTS Server Edition supports three (3) major architectures: Intel x86, AMD64 and ARM. The
+table below lists recommended hardware specifications. Depending on your needs, you might manage with
+less than this. However, most users risk being frustrated if they ignore these suggestions.
+
+\section{AN INTRODUCTION TO PYTHON}
+The Raspberry Pi gets the first half of its name from a long-standing tradition of using fruit to name new computing systems from classic microcomputers like the Acorn, Apricot and Tangerine to more recognizably modern brands including Apple and Black Berry but the second half comes courtesy of the Python programming language.
+
+\subsubsection{INTERPRETER LANGUAGE}
+Flexible and powerful, Python was originally developed in the late 1980s at the National Research Institute for Mathematics and Computer Science by Guido van Rossum as a successor to the ABC language. Since its introduction, Python has grown in popularity thanks to what is seen as a clear and expressive syntax developed with a focus on ensuring that code is readable. Python is a high-level language. This means that Python code is written in largely recognizable English, providing the Pi with commands in a manner that is quick to learn and easy to follow. This is in marked contrast to low-level languages, like assembler, which are closer to how the computer  but almost impossible for a human to follow without experience. The high-level nature and clear syntax of Python make it a valuable tool for anyone who wants to learn to program. It is also the language that is recommended by the Raspberry Pi Foundation for those looking to progress from the simple Scratch .
+\textbf{Example : Hello World}
+If you are creating the example program in IDLE rather than a plain text editor, you will notice that the text is multi color, (where colours are represented as differing shades of grey in the print edition). This is a feature known as syntax highlighting, and is a feature of IDE and the more-advanced text editing tools. Syntax highlighting changes the colour of sections of the text according to their function, in order to make the program easier to understand at a glance. It also makes it easy to spot so-called syntax errors caused by forgetting to put an end-quote in a print command or forgetting to comment out a remark.
+
+\subsubsection{PYTHON AND NETWORKING}
+So far, you have learned how Python can be used to create standalone programs, but the language can also be used to create programs that communicate with the outside world over a computers network connection. This next example, written by Tom Hudson, offers a brief glimpse of these possibilities with a tool for monitoring the users connected to an Internet Relay Chat (IRC) channel. As usual, create a new project in IDLE or a text editor and enter the shebang line along with a comment describing the purpose of the program:
+
+.
+
+There are some constants needed for this program to operate. Constants are like variables in that they can have values assigned to them,but unlike variables, the value in a constant should not change. To help differentiate a constant from a variable, it is good practice to use all-capital letters for their names that way it is easy to see at glance whether a particular section of the code is using a constant or a variable. Type the following two lines into the program:
+
+
+These are IRC status codes, provided by the server to indicate when particular operations have completed. These are used by the program to know when it has received the required list of names from the IRC server. Next, set up the variables for the server connection by entering the 
+following lines:
+
+
+The first line tells Python to create a dict data type. Short for dictionary, this allows multiple variables to be stored in a single master variable in this case, irc. These individual variables can then be recalled later in the program. Although you could write this program without using dicts to store variables, it would make the program significantly more difficult to read. The dict begins with the opening curly brace, and ends with the closing curly brace on the final line. The host variable should be set to the fully-qualified domain name (FQDN) of the IRC server to which the program will connect. In this example, chat.free node.net is used, but if you want to customise the program to use a different server, change the domain name here. The port variable tells the program which network port IRC is running  on, which will usually be 6667. The channel variable tells Python which channel to join in order to monitor the users, while names interval controls how long the program waits to refresh the list of users, measured in seconds. Set up a second dict to store the user-specific variables by typing in the following lines:
+
+
+As with irc, all these variables are stored within a dict called user to make it clear which variables pertain to which section. The nick variable should be set to the IRC nickname the program will use. Do not use your usual nickname if you are planning to connect to the IRC server at the same time; instead, try appending -bot to the end of your name to make it clear that the user is a program rather than a real person. Do the same with user name, and fill in the real name variable with a descriptive message about whom the bot belongs to. The host name and server name variables can be left set to local host, or altered to match your Internet address.
+The socket module requires the user to create a socket object. This object provides network connectivity to the rest of the program. Create the socket object by typing in the following line:
+
+The try and except commands are included in this code for error handling. If the system fails to connect to the server because the Pi is not connected to the Internet, for example, or because the server is down for maintenance the program will print an error message and gracefully exit. The s.connect line tells the socket module to try connecting to the IRC server, using the host and port variables held in the irc dict. If the program quit from the exception, it has successfully connected to the IRC server. Before you can get a list of names in a channel, however, you need to identify yourself to the server and issue some commands using the send function of the socket module. Type the following lines into the program:
+
+The send function works in almost exactly the same way as the print function, except that instead of printing to the standard output usually the terminal window or console. it sends the output through the network connection. In this case, the program is sending strings of text to the IRC server and telling it to register the program using the nickname held in the nick variable and the user details held in the user name, host name, server name and real name variables. Next, the program sends the command to join the channel specified in the channel variable, and finally, it sends the command to receive the list of users in that channel. Although this example is tailored to IRC, the same basic principle can be used to issue commands to any network service with modifications, this program could be used to list the files on an FTP server, or unread emails on a POP3 server. Receiving data from the socket is a little more complicated. First,  need to create an empty string variable that will act as the receive buffer, holding data from the server as received until it can be processed. Initialise the buffer by typing in the following line:
+
+Next, create an empty list ,which will be used to store the names of users, by typing the following line: names = []
+The list data type is the same as you used to store the locations in the Raspberry Snake game. Unlike a normal variable, it can store multiple values in this case, the names of users present in the IRC channel. The next step is to create an infinite loop, during which the program will continuously query the server for user names and print them to the screen. Start the loop by typing.
+
+When that the case, the fraction is left in the buffer ready to receive the remainder of the line the next time the loop runs and the next 1 KB chunk is received from the server. At this point, the lines variable contains a list of full responses full lines received from the server. Type the following to process these lines and find the names of channel participants: for line in lines.
+This runs through every line found in the lines variable, and looks for the numerical IRC response code provided by the server. Although there are plenty of different response codes, this program is only interested in the two defined as constants at the start of the program: 353, which means a list of names follows, and 366, which means the list has ended. The if statement looks for the first of these responses, and then uses the split function to retrieve these names and add them to the names list. Now, the names list contains all the names received from the server in response to the programs query. This may not be all the names, however: until the 366 response, which signals the end of the member names, is received, the list is incomplete. That is why the last is appending the newly-received names to the existing list, rather than blanking it out entirely: each time that section of the code runs, the program is only likely to have received a sub-section of the entire member list. To tell Python what to do when the full list has been received, enter the following lines.
+\subsection{OPENCV}
+Officially launched in 1999, the Open CV project was initially an Intel Research initiative to advance CPU-intensive applications, part of a series of projects including real-time ray tracing and 3D display walls. The main contributors to the project included a number of optimization experts in Intel Russia, as well as Intel Performance Library Team. In the early days of Open CV, the goals of the project were described as:
+Advance vision research by providing not only open but also optimized code for basic vision infrastructure. No more reinventing the wheel.
+
+Disseminate vision knowledge by providing a common infrastructure that developers could build on, so that code would be more readily readable and transferable.
+Advance vision-based commercial applications by making portable, performance-optimized code available for free – with a license that did not require code to be open or free itself.
+The first alpha version of Open CV was released to the public at the IEEE Conference on Computer Vision and Pattern Recognition in 2000, and five betas were released between 2001 and 2005. The first 1.0 version was released in 2006. A version 1.1 "pre-release" was released in October 2008.
+
+The second major release of the Open CV was in October 2009. Open CV 2 includes major changes to the C++ interface, aiming at easier, more type-safe patterns, new functions, and better implementations for existing ones in terms of performance (especially on multi-core systems). Official releases now occur every six months and development is now done by an independent Russian team supported by commercial corporations.
+
+\subsubsection{OPEN CV APPLICATION}
+Open CV application areas include:
+2D and 3D feature tool kits
+Ego motion estimation
+Facial recognition system
+Gesture recognition
+Human computer interaction (HCI)
+Mobile robotics
+Motion understanding
+
+\subsubsection{OPEN CV INTERFACING PROGRAMMING LANGUAGE}
+Open CV is written in C++ and its primary interface is in C++, but it still retains a less comprehensive though extensive older C interface. There are bindings in Python, Java and MATLAB/OCTAVE. The API for these interfaces can be found in the online documentation. 
+
+\subsubsection{OPERATING SYSTEM SUPPORT}
+Open CV runs on the following desktop operating systems: Windows, Linux, macOS, Free BSD, Net BSD, Open BSD. Open CV runs on the following mobile operating systems: Android, iOS, Maemo, Black Berry 10. The user can get official releases from Source Forge or take the latest sources from Git Hub. Open CV uses C Make.
+

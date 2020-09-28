@@ -1,0 +1,143 @@
+
+\chapter{CHAPTER 4}
+
+
+
+\section{ALGORITHMS}
+
+\subsection{HSV COLOR SPACE}
+HSL (Hue, Saturation, Lightness) and HSV (Hue, Saturation, Value) are two alternative representations of the RGB color model, designed in the 1970s by computer graphicsresearchers to more closely align with the way human vision perceives color-making attributes. In these models, colors of each hue are arranged in a radial slice, around a central axis of neutral colors which ranges from black at the bottom to white at the top. The HSV representation models the way paints of different colors mix together, with the saturation dimension resembling various shades of brightly colored paint, and the value dimension resembling the mixture of those paints with varying amounts of black or white paint. The HSL model attempts to resemble more perceptual color models such as NCS or Munsell, placing fully saturated colors around a circle at a lightness value of 1/2, where a lightness value of 0 or 1 is fully black or white, respectively.
+
+\subsubsection{HUE}
+In each of our models, we calculate both hue and what this article will call chroma, after Joblove and Greenberg (1978), in the same way—that is, the hue of a color has the same numerical values in all of these models, as does its chroma. If we take our tilted RGB cube, and project it onto the "chromaticity plane" perpendicular to the neutral axis, our projection takes the shape of a hexagon, with red, yellow, green, cyan, blue, and magenta at its corners . Hue is roughly the angle of the vector to a point in the projection, with red at 0°, while chroma is roughly the distance of the point from the origin.
+More precisely, both hue and chroma in this model are defined with respect to the hexagonal shape of the projection. The chroma is the proportion of the distance from the origin to the edge of the hexagon. In the lower part of the adjacent diagram, this is the ratio of lengths OP/OP′, or alternately the ratio of the radii of the two hexagons. This ratio is the difference between the largest and smallest values among R, G, or B in a color. To make our definitions easier to write, we’ll define these maximum, minimum, and chroma component values as M, m, and C, respectively.
+To understand why chroma can be written as M − m, notice that any neutral color, with R = G = B, projects onto the origin and so has 0 chroma. Thus if we add or subtract the same amount from all three of R, G, and B, we move vertically within our tilted cube, and do not change the projection. Therefore, any two colors (R, G, B) and (R − m, G − m, B − m) project on the same point, and have the same chroma. The chroma of a color with one of its components equal to zero (m = 0) is simply the maximum of the other two components. This chroma is M in the particular case of a color with a zero component, and M − min general.
+
+The hue is the proportion of the distance around the edge of the hexagon which passes through the projected point, originally measured on the range [0, 1) but now typically measured in degrees [0°, 360°). For points which project onto the origin in the chromaticity plane (i.e., grays), hue is undefined. Mathematically, this definition of hue is written piecewise:
+Sometimes, neutral colors (i.e. with C = 0) are assigned a hue of 0° for convenience of representation.The definitions of hue and chroma in HSL and HSV have the effect of warping hexagons into circles.
+These definitions amount to a geometric warping of hexagons into circles: each side of the hexagon is mapped linearly onto a 60° arc of the circle. After such a transformation, hue is precisely the angle around the origin and chroma the distance from the origin: the angle and magnitude of the vector pointing to a color.
+ Constructing rectangular chromaticity coordinates α and β, and then transforming those into hue H2 and chroma C2 yields slightly different values than computing hexagonal hue H and chroma C: compare the numbers in this diagram to those earlier in this section.
+Sometimes for image analysis applications, this hexagon-to-circle transformation is skipped, and hue and chroma (we’ll denote these H2 and C2) are defined by the usual cartesian-to-polar coordinate transformations . The easiest way to derive those is via a pair of cartesian chromaticity coordinates which we’ll call α and β:
+ (The atan2 function, a "two-argument arctangent", computes the angle from a cartesian coordinate pair.)
+ Notice that these two definitions of hue (H and H2) nearly coincide, with a maximum difference between them for any color of about 1.12°—which occurs at twelve particular hues, for instance H = 13.38°, H2 = 12.26°—and with H = H2 for every multiple of 30°. The two definitions of chroma (C and C2) differ more substantially: they are equal at the corners of our hexagon, but at points halfway between two corners, such as H = H2 = 30°, we have C = 1, but C2 = √¾ ≈ 0.866, a difference of about 13.4%.
+ 
+ \subsubsection{SATURATION}
+ When encoding colors in a hue/lightness/chroma or hue/value/chroma model (using the definitions from the previous two sections) model, not all combinations of lightness (or value) and chroma are meaningful: that is, half of the colors denotable using H ∈ [0°, 360°), C ∈ [0, 1], and V ∈ [0, 1] fall outside the RGB gamut. The creators of these models considered this a problem for some uses. For example, in a color selection interface with two of the dimensions in a rectangle and the third on a slider, half of that rectangle is made of unused space. Now imagine we have a slider for lightness: the user’s intent when adjusting this slider is potentially ambiguous: how should the software deal with out-of-gamut colors? Or conversely, If the user has selected as colorful as possible a dark purple , and then shifts the lightness slider upward, what should be done: would the user prefer to see a lighter purple still as colorful as possible for the given hue and lightness , or a lighter purple of exactly the same chroma as the original color ?
+To solve problems such as these, the HSL and HSV models scale the chroma so that it always fits into the range [0, 1] for every combination of hue and lightness or value, calling the new attribute saturation in both cases. To calculate either, simply divide the chroma by the maximum chroma for that value or lightness.
+ In HSI, saturation, shown in the slice on the right, is roughly the chroma relative to lightness. Also common is a model with dimensions I, H2, C2, shown in the slice on the left. Notice that the hue in these slices is the same as the hue above, but H differs slightly from H2.
+The HSI model commonly used for computer vision, which takes H2 as a hue dimension and the component average I("intensity") as a lightness dimension, does not attempt to "fill" a cylinder by its definition of saturation. Instead of presenting color choice or modification interfaces to end users, the goal of HSI is to facilitate separation of shapes in an image. Saturation is therefore defined in line with the psychometric definition: chroma relative to lightness . See the Use in image analysis section of this article.
+
+Using the same name for these three different definitions of saturation leads to some confusion, as the three attributes describe substantially different color relationships; in HSV and HSI, the term roughly matches the psychometric definition, of a chroma of a color relative to its own lightness, but in HSL it does not come close. Even worse, the word saturation is also often used for one of the measurements we call chroma above (C or C2).
+
+\subsubsection{VALUE}
+While the definition of hue is relatively uncontroversial—it roughly satisfies the criterion that colors of the same perceived hue should have the same numerical hue—the definition of a lightness or value dimension is less obvious: there are several possibilities depending on the purpose and goals of the representation. Here are four of the most common. 
+The simplest definition is just the average of the three components, in the HSI model called intensity. This is simply the projection of a point onto the neutral axis—the vertical height of a point in our tilted cube. The advantage is that, together with Euclidean-distance calculations of hue and chroma, this representation preserves distances and angles from the geometry of the RGB cube.
+In the HSV "hexcone" model, value is defined as the largest component of a color, our M above . This places all three primaries, and also all of the "secondary colors"—cyan, yellow, and magenta—into a plane with white, forming a hexagonal pyramid out of the RGB cube.
+In the HSL "bi-hexcone" model, lightness is defined as the average of the largest and smallest color components. This definition also puts the primary and secondary colors into a plane, but a plane passing halfway between white and black. The resulting color solid is a double-cone similar to Ostwald’s.
+A more perceptually relevant alternative is to use luma, Y′, as a lightness dimension . Luma is the weighted average of gamma-corrected R, G, and B, based on their contribution to perceived lightness, long used as the monochromatic dimension in color television broadcast. For the Rec. 709 primaries used in sRGB, Y′709 = 0.21R + 0.72G + 0.07B; for the Rec. 601 NTSC primaries, Y′601 ≈ 0.30R + 0.59G + 0.11B; for other primaries different coefficients should be used.
+All four of these leave the neutral axis alone. That is, for colors with R = G = B, any of the four formulations yields a lightness equal to the value of R, G, or B.
+
+\subsection{IMAGE SEGMENTATION}
+In computer vision, image segmentation is the process of partitioning a digital image into multiple segments (sets of pixels, also known as super-pixels). The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful and easier to analyze. Image segmentation is typically used to locate objects and boundaries (lines, curves, etc.) in images. More precisely, image segmentation is the process of assigning a label to every pixel in an image such that pixels with the same label share certain characteristics.
+
+The result of image segmentation is a set of segments that collectively cover the entire image, or a set of contours extracted from the image. Each of the pixels in a region are similar with respect to some characteristic or computed property, such as color, intensity, or texture. Adjacent regions are significantly different with respect to the same characteristic(s).When applied to a stack of images, typical in medical imaging, the resulting contours after image segmentation can be used to create 3D reconstructions with the help of interpolation algorithms like Marching cubes.
+
+\subsubsection{THRESHOLDING}
+The simplest method of image segmentation is called the thresholding method. This method is based on a clip-level (or a threshold value) to turn a gray-scale image into a binary image. There is also a balanced histogram thresholding.
+The key of this method is to select the threshold value (or values when multiple-levels are selected). Several popular methods are used in industry including the maximum entropy method, Otsu's method (maximum variance), and k-means clustering.
+Recently, methods have been developed for thresholding computed tomography (CT) images. The key idea is that, unlike Otsu's method, the thresholds are derived from the radiographs instead of the (reconstructed) image.
+
+New methods suggested the usage of multi-dimensional fuzzy rule-based non-linear thresholds. In these works decision over each pixel's membership to a segment is based on multi-dimensional rules derived from fuzzy logic and evolutionary algorithms based on image lighting environment and application.
+
+\subsubsection{CLUSTERING METHODS}
+The K-means algorithm is an iterative technique that is used to partition an image into K clusters.The basic algorithm is
+Pick K cluster centers, either randomly or based on someheuristic method, for example K-means++
+Assign each pixel in the image to the cluster that minimizes the distance between the pixel and the cluster center
+Re-compute the cluster centers by averaging all of the pixels in the cluster
+Repeat steps 2 and 3 until convergence is attained (i.e. no pixels change clusters)
+In this case, distance is the squared or absolute difference between a pixel and a cluster center. The difference is typically based on pixel color, intensity, texture, and location, or a weighted combination of these factors. K can be selected manually, randomly, or by a heuristic. This algorithm is guaranteed to converge, but it may not return the optimal solution. The quality of the solution depends on the initial set of clusters and the value of K.
+
+\subsubsection{COMPRESSION BASED METHODS}
+Compression based methods postulate that the optimal segmentation is the one that minimizes, over all possible segmentations, the coding length of the data.The connection between these two concepts is that segmentation tries to find patterns in an image and any regularity in the image can be used to compress it. The method describes each segment by its texture and boundary shape. Each of these components is modeled by a probability distribution function and its coding length is computed as follows:
+The boundary encoding leverages the fact that regions in natural images tend to have a smooth contour. This prior is used by Huffman coding to encode the difference chain code of the contours in an image. Thus, the smoother a boundary is, the shorter coding length it attains.
+
+Texture is encoded by lossy compression in a way similar to minimum description length (MDL) principle, but here the length of the data given the model is approximated by the number of samples times the entropy of the model. The texture in each region is modeled by a multivariate normal distribution whose entropy has a closed form expression. An interesting property of this model is that the estimated entropy bounds the true entropy of the data from above. This is because among all distributions with a given mean and covariance, normal distribution has the largest entropy. Thus, the true coding length cannot be more than what the algorithm tries to minimize.
+
+For any given segmentation of an image, this scheme yields the number of bits required to encode that image based on the given segmentation. Thus, among all possible segmentations of an image, the goal is to find the segmentation which produces the shortest coding length. This can be achieved by a simple agglomerative clustering method. The distortion in the lossy compression determines the coarseness of the segmentation and its optimal value may differ for each image. This parameter can be estimated heuristically from the contrast of textures in an image. For example, when the textures in an image are similar, such as in camouflage images, stronger sensitivity and thus lower quantization is required.
+
+\subsubsection{HISTOGRAM BASED METHODS}
+Histogram-based methods are very efficient compared to other image segmentation methods because they typically require only one pass through the pixels. In this technique, a histogram is computed from all of the pixels in the image, and the peaks and valleys in the histogram are used to locate the clusters in the image.Color or intensity can be used as the measure.
+A refinement of this technique is to recursively apply the histogram-seeking method to clusters in the image in order to divide them into smaller clusters. This operation is repeated with smaller and smaller clusters until no more clusters are formed.
+One disadvantage of the histogram-seeking method is that it may be difficult to identify significant peaks and valleys in the image.
+Histogram-based approaches can also be quickly adapted to apply to multiple frames, while maintaining their single pass efficiency. The histogram can be done in multiple fashions when multiple frames are considered. The same approach that is taken with one frame can be applied to multiple, and after the results are merged, peaks and valleys that were previously difficult to identify are more likely to be distinguishable. The histogram can also be applied on a per-pixel basis where the resulting information is used to determine the most frequent color for the pixel location. This approach segments based on active objects and a static environment, resulting in a different type of segmentation useful in video tracking.
+
+\subsubsection{EDGE DETECTION}
+Edge detection is a well-developed field on its own within image processing. Region boundaries and edges are closely related, since there is often a sharp adjustment in intensity at the region boundaries. Edge detection techniques have therefore been used as the base of another segmentation technique.
+The edges identified by edge detection are often disconnected. To segment an object from an image however, one needs closed region boundaries. The desired edges are the boundaries between such objects or spatial-taxons.
+Spatial-taxons are information granules, consisting of a crisp pixel region, stationed at abstraction levels within a hierarchical nested scene architecture. They are similar to the Gestalt psychological designation of figure-ground, but are extended to include foreground, object groups, objects and salient object parts. Edge detection methods can be applied to the spatial-taxon region, in the same manner they would be applied to a silhouette. This method is particularly useful when the disconnected edge is part of an illusory contour
+Segmentation methods can also be applied to edges obtained from edge detectors. Lindeberg and Li developed an integrated method that segments edges into straight and curved edge segments for parts-based object recognition, based on a minimum description length (MDL) criterion that was optimized by a split-and-merge-like method with candidate breakpoints obtained from complementary junction cues to obtain more likely points at which to consider partitions into different segments.
+
+\subsubsection{DUAL CLUSTERING METHOD}
+This method is a combination of three characteristics of the image: partition of the image based on histogram analysis is checked by high compactness of the clusters (objects), and high gradients of their borders. For that purpose two spaces has to be introduced: one space is the one-dimensional histogram of brightness H = H(B), the second space – the dual 3-dimensional space of the original image itself B = B(x, y). The first space allows to measure how compact is distributed the brightness of the image by calculating minimal clustering kmin. Threshold brightness T corresponding to kmin defines the binary (black-and-white) image – bitmap b = φ(x, y), where φ(x, y) = 0, if B(x, y) < T, and φ(x, y) = 1, if B(x, y) ≥ T. The bitmap b is an object in dual space. On that bitmap a measure has to be defined reflecting how compact distributed black (or white) pixels are. So, the goal is to find objects with good borders. For all T the measure MDC =G/(k×L) has to be calculated (where k is difference in brightness between the object and the background, L is length of all borders, and G is mean gradient on the borders). Maximum of MDC defines the segmentation.
+
+\subsubsection{REGION GROWING METHODS}
+Region-growing methods rely mainly on the assumption that the neighboring pixels within one region have similar values. The common procedure is to compare one pixel with its neighbors. If a similarity criterion is satisfied, the pixel can be set to belong to the cluster as one or more of its neighbors. The selection of the similarity criterion is significant and the results are influenced by noise in all instances.
+The method of Statistical Region Merging(SRM) starts by building the graph of pixels using 4-connectedness with edges weighted by the absolute value of the intensity difference. Initially each pixel forms a single pixel region. SRM then sorts those edges in a priority queue and decide whether or not to merge the current regions belonging to the edge pixels using a statistical predicate.
+One region-growing method is the seeded region growing method. This method takes a set of seeds as input along with the image. The seeds mark each of the objects to be segmented. The regions are iteratively grown by comparison of all unallocated neighboring pixels to the regions. The difference between a pixel's intensity value and the region's mean, , is used as a measure of similarity. The pixel with the smallest difference measured in this way is assigned to the respective region. This process continues until all pixels are assigned to a region. Because seeded region growing requires seeds as additional input, the segmentation results are dependent on the choice of seeds, and noise in the image can cause the seeds to be poorly placed.
+
+Another region-growing method is the unseeded region growing method. It is a modified algorithm that does not require explicit seeds. It starts with a single region —the pixel chosen here does not markedly influence the final segmentation. At each iteration it considers the neighboring pixels in the same way as seeded region growing. It differs from seeded region growing in that if the minimum is less than a predefined threshold then it is added to the respective region . If not, then the pixel is considered different from all current regions and a new region is created with this pixel.
+
+One variant of this technique, proposed by Haralick and Shapiro (1985),is  based on pixel intensities. The mean andscatter of the region and the intensity of the candidate pixel are used to compute a test statistic. If the test statistic is sufficiently small, the pixel is added to the region, and the region’s mean and scatter are recomputed. Otherwise, the pixel is rejected, and is used to form a new region.
+A special region-growing method is called -connected segmentation (see also lambda-connectedness). It is based on pixelintensities and neighborhood-linking paths. A degree of connectivity (connectedness) is calculated based on a path that is formed by pixels. For a certain value of , two pixels are called -connected if there is a path linking those two pixels and the connectedness of this path is at least -connectedness is an equivalence relation.
+
+Split-and-merge segmentation is based on a quadtree partition of an image. It is sometimes called quadtree segmentation.
+This method starts at the root of the tree that represents the whole image. If it is found non-uniform (not homogeneous), then it is split into four child squares (the splitting process), and so on. If, in contrast, four child squares are homogeneous, they are merged as several connected components (the merging process). The node in the tree is a segmented node. This process continues recursively until no further splits or merges are possible. When a special data structure is involved in the implementation of the algorithm of the method, its time complexity can reach , an optimal algorithm of the method.
+
+\subsubsection{APPLICATIONS}
+Content-based image retrieval
+Machine vision
+Medical imaging, including volume rendered images from computed tomography and magnetic resonance imaging.
+Locate tumors and other pathologies
+Measure tissue volumes
+Diagnosis, study of anatomical structure
+Surgery planning
+Virtual surgery simulation
+Intra-surgery navigation
+Object detection
+Pedestrian detection
+Face detection
+Brake light detection
+Locate objects in satellite images (roads, forests, crops, etc.)
+Recognition Tasks
+Face recognition
+Fingerprint recognition
+Iris recognition
+Traffic control systems
+Video surveillance
+Several general-purpose algorithms and techniques have been developed for image segmentation. To be useful, these techniques must typically be combined with a domain's specific knowledge in order to effectively solve the domain's segmentation problems.
+
+\subsection{FEATURE EXTRACTION}
+In machine learning, pattern recognition and in image processing, feature extraction starts from an initial set of measured data and builds derived values (features) intended to be informative and non-redundant, facilitating the subsequent learning and generalization steps, and in some cases leading to better human interpretations. Feature extraction is related to dimensionality reduction.
+When the input data to an algorithm is too large to be processed and it is suspected to be redundant (e.g. the same measurement in both feet and meters, or the repetitiveness of images presented as pixels), then it can be transformed into a reduced set of features (also named a feature vector). Determining a subset of the initial features is called feature selection.The selected features are expected to contain the relevant information from the input data, so that the desired task can be performed by using this reduced representation instead of the complete initial data.
+Feature extraction involves reducing the amount of resources required to describe a large set of data. When performing analysis of complex data one of the major problems stems from the number of variables involved. Analysis with a large number of variables generally requires a large amount of memory and computation power, also it may cause a classification algorithm to overfit to training samples and generalize poorly to new samples. Feature extraction is a general term for methods of constructing combinations of the variables to get around these problems while still describing the data with sufficient accuracy. Many machine learning practitioners believe that properly optimized feature extraction is the key to effective model construction.
+
+Results can be improved using constructed sets of application-dependent features, typically built by an expert. One such process is called feature engineering. Alternatively, general dimensionality reduction techniques are used such as:
+Independent component analysis
+Isomap
+Kernel PCA
+Latent semantic analysis
+Partial least squares
+Principal component analysis
+Multifactor dimensionality reduction
+Nonlinear dimensionality reduction
+Multilinear Principal Component Analysis
+Multilinear subspace learning
+Semidefinite embedding
+Autoencoder
+
+
+
+
+%\lipsum[4]\\
+
+%\IITM

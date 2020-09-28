@@ -1,0 +1,43 @@
+\documentclass[12pt]{main_class}[2020/05/12]
+
+\usepackage{IITM}
+\usepackage[left=1cm,right=1cm]{geometry}
+
+
+% for Disappearing the Chapter Context.
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+
+\begin{document}
+
+ 
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\color{black}
+
+\input{./chapter_1}
+\input{./chapter_2}
+\input{./chapter_3}
+\input{./chapter_4}
+\input{./chapter_5}
+
+\end{document}
