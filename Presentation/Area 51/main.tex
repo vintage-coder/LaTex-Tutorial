@@ -1,0 +1,337 @@
+\documentclass[12pt,aspect=169]{beamer}
+\graphicspath{{Images/}}
+
+%======================Packages=============================================
+\usepackage{ragged2e}\justifying
+\usepackage{txfonts}
+\usepackage{booktabs}
+\usepackage[numbers]{natbib}
+\usepackage{bibentry}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{appendixnumberbeamer}
+\usepackage{media9}
+
+%
+%%==================================Themes====================================
+%\usetheme{EastLansing}
+
+%\usetheme{EastLansing}
+\usetheme[secheader]{Madrid}
+
+\useinnertheme{rectangles}
+
+%\useoutertheme{sidebar}
+ 
+%\usecolortheme{wolverine}
+\definecolor{burgundy}{rgb}{0.5 0 0.15}
+%
+\usecolortheme[named=burgundy]{structure}
+
+\usefonttheme{structurebold}
+%\usefonttheme{serif}
+
+
+%
+%
+\setbeamersize{text margin left=7mm, text margin right=7mm}
+\setbeamertemplate{frametitle}[default][left,leftskip=2mm]
+%\setbeamertemplate{frametitle continuation}{\frametitle{References}}
+%\setbeamertemplate{bibliography item}[text]
+%\setbeamertemplate{page number in head/foot}[appendixframenumber]
+
+
+\setbeamerfont{title}{series=\bfseries, size=\LARGE}
+\setbeamerfont{author}{series=\bfseries}
+\setbeamerfont{institute}{series=\bfseries}
+\setbeamerfont{date}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+
+
+\setbeamercolor{title}{bg=red, fg=white}
+\setbeamercolor{author}{fg=blue}
+\setbeamercolor{institute}{fg=burgundy}
+
+\setbeamercolor{author in head/foot}{bg=red}
+\setbeamercolor{title in head/foot}{bg=gray}
+\setbeamercolor{date in head/foot}{bg=black!50!red}
+%\setbeamercolor{page number in head/foot}{bg=blue,fg=white}
+
+
+\setbeamertemplate{footline}{
+\leavevmode\bfseries
+\begin{beamercolorbox}[wd=0.3\paperwidth,ht=7pt,dp=2.5pt,center]{author in head/foot}
+\insertshortauthor~(\insertshortinstitute)
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.38\paperwidth,ht=7pt,dp=2.5pt,center]{title in head/foot}
+\insertshorttitle
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.22\paperwidth,ht=7pt,dp=2.5pt,center]{date in head/foot}
+\insertshortdate
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.1\paperwidth,ht=7pt,dp=2.5pt,center]{page number in head/foot}
+\insertframenumber/\inserttotalframenumber
+\end{beamercolorbox}%
+}
+
+
+\setbeamertemplate{headline}{
+\leavevmode\bfseries
+\begin{beamercolorbox}[wd=0.25\paperwidth,ht=7pt,dp=2.5pt,center]{section in head/foot}
+\insertsectionhead
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.75\paperwidth,ht=7pt,dp=2.5pt,center]{palette quaternary}
+\insertsectionnavigationhorizontal{0.75\paperwidth}{}{}
+\end{beamercolorbox}%
+}
+
+\setbeamercolor{section in head/foot}{bg=purple}
+
+%=================================Others =====================================
+
+\setlength{\parskip}{5pt}
+
+\title[Area 51 Presentation 2020]{Area 51}
+\subtitle{Area 51 Research}
+\author[Dong Lee]{Dong Lee\\ \tiny area51@gmail.com\\[5mm]
+\includegraphics[scale=0.08]{science}}
+
+\institute[IITA]{Department of Astrophysics,\\ Indian Institute of Astrophysics,\\ Bengaluru-560068, India}
+\date[\tiny \today]{\scriptsize \today}
+%\titlegraphic{\includegraphics[scale=0.08]{science}}
+
+\logo{\includegraphics[scale=0.08]{science}}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+\maketitle
+\end{frame}
+
+\begin{frame}[t]{Introduction}
+\scriptsize
+Area 51 is the common name of a highly classified United States Air Force (USAF) facility located within the Nevada Test and Training Range. A remote detachment administered by Edwards Air Force Base, the facility is officially called Homey Airport (KXTA) or Groom Lake, named after the salt flat situated next to its airfield.
+
+Details of the facility operations are not publicly known, but the USAF says that it is an open training range, and it most likely supports the development and testing of experimental aircraft and weapons systems. The USAF acquired the site in 1955, primarily for flight testing the Lockheed U-2 aircraft.
+
+\end{frame}
+
+ \begin{frame}[t]{Lists}
+\scriptsize
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+	\item Item Six
+	
+\end{enumerate}
+
+\begin{itemize}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[t]{Lists}
+\scriptsize
+\begin{columns}[T]
+\column{0.32\linewidth}
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+\end{enumerate}
+
+\column{0.32\linewidth}
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+\end{enumerate}
+
+\column{0.32\linewidth}
+\begin{itemize}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+	\item Item Six
+	\item Item Seven
+	\item Item Eight	
+	\item Item Nine
+	\item Item Ten
+	\item Item Eleven
+\end{itemize}
+
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}{Blocks}
+\scriptsize
+\begin{columns}[T]
+\column{0.32\linewidth}
+\begin{block}{Title of the block}
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+	\item Item Five	
+	\item Item Six
+	\item Item Seven
+	\item Item Eight	
+	\item Item Nine
+	\item Item Ten
+	\item Item Eleven
+\end{enumerate}
+
+\end{block}
+
+\column{0.32\linewidth}
+\begin{exampleblock}{Title of the Example Block}
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+\end{enumerate}
+
+\end{exampleblock}
+
+\column{0.32\linewidth}
+\begin{alertblock}{Title of the Alert Block}
+\begin{enumerate}
+	\item Item One
+	\item Item Two
+	\item Item Three
+	\item Item Four
+\end{enumerate}
+
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Figures and Tables}
+
+\centering\tiny
+\begin{columns}[T]
+
+\column{0.32\linewidth}
+\includegraphics[width=0.96\textwidth]{science} \\(a)
+
+\column{0.32\linewidth}
+\includegraphics[width=0.96\textwidth]{science} \\(b)
+
+\column{0.32\linewidth}
+\includegraphics[width=0.96\textwidth]{science} \\(c)
+
+
+\end{columns}
+
+\tiny
+\begin{tabular}{llll}
+	\toprule
+	S.no. &  Upper Phase & Lower Phase & Strings(Y/N)\\
+	\midrule
+	1& Lipid/ethanol & W & Y \\
+	2& PS/ethanol & W & Y \\
+	3& PS/methanol & W & Y\\
+	4& PS/propanol & W & Y\\
+	5& PS/sucrose & W & N\\
+	6& PS/water & W & N\\
+	\bottomrule
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}{Mathematics}
+
+%$$ $$ or \[\]
+
+$$ E=mc^2 $$
+\scriptsize
+
+\begin{block}{Drift Velocity}
+	$$ E=mc^2 $$
+\end{block}
+
+\begin{columns}[T]
+\column{0.45\linewidth}
+\begin{itemize}
+	\item $$ E=mc^2 $$
+	\item $$ E=mc^2 $$
+	\item $$ E=mc^2 $$
+	\item $$ E=mc^2 $$
+\end{itemize}
+
+\column{0.45\linewidth}
+\includegraphics[width=\linewidth]{science}
+
+Some citations: \cite{1} and \cite{2}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[t]{Linking Inter-Slides and External files}
+\scriptsize
+\begin{enumerate}[t]\setlength{\itemsep}{20pt}
+	\item Linking with document
+	\item Linking a particular slide with an external document (audio,video,graphics, etc.)
+	\item Embedding Video and Animations. \cite{1}
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Embedding Movies}
+\scriptsize\centering
+
+\includemedia[
+addresource=Media/SampleVideo.mkv,
+flashvars={source=Media/SampleVideo.mkv}]
+{\includegraphics[width=0.45\linewidth]{Images/science}}{VPlayer.swf}
+
+\includemedia[
+addresource=Media/SampleAudio.mp3,
+flashvars={source=Media/SampleAudio.mp3}]
+{\includegraphics[width=0.25\linewidth]{Images/science}}{APlayer.swf}
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
