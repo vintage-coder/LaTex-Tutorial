@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+
+
+
+
+\begin{document}
+
+
+\ifx\milk\sugar
+Coffee
+\else
+\if\milk
+	Milk
+\else
+	Sugar
+\fi
+\fi
+
+
+\def\milk{1}
+
+\ifx\milk\sugar
+Coffee
+\else
+\if\milk0
+	Milk
+\else
+	Sugar
+\fi
+\fi
+
+
+\def\milk{0}
+
+\ifx\milk\sugar
+Coffee
+\else
+\if\milk0
+	Milk
+\else
+	Sugar
+\fi
+\fi
+
+
+\end{document}
