@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+%\newif\ifdothis
+%
+%\newif\ifdothat
+%
+%\dothattrue  % Setting the state of the boolean variable \ifdothat` to true, otherwise it's false already (or use \dothatfalse explicitly)
+%
+%\ifdothis
+%
+%\newcommand{\foo}{\textbf{Foo}}
+%\else
+%\ifdothat
+%\newcommand{\foo}{\textbf{Foo that}}
+%\else
+%\newcommand{\foo}{\textbf{Dummy content}}
+%\fi % \fi of \ifdothat
+%\fi % Outer \fi
+%
+%
+%\begin{document}
+%\foo
+%
+%\end{document}
+
+
+
+\newif\ifantony
+\newif\ifdavid
+\newif\ifethan
+
+
+%\amuthutrue     %Setting amuthu boolen variable to true
+
+\antonytrue
+
+\ifantony
+\newcommand{\name}{\textbf{ \color{red} Antony was printed}}
+\else
+\ifdavid
+\newcommand{\name}{\textbf{\color{green} David was printed}}
+\else
+\ifethan
+\newcommand{\name}{\textbf{\color{blue} Ethan was printed}}
+\fi
+\fi
+\fi
+
+
+\begin{document}
+
+\name
+
+\end{document}
